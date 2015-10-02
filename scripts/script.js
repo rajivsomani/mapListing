@@ -29,7 +29,10 @@ function initMap() {
   });
   setMarkers(map);
   document.getElementById('submit').addEventListener('click', function() {
-    initMap();
+	selectedCity = document.querySelector("#city").value;
+    map.setCenter(citymap[selectedCity].center);
+	
+	setMarkers(map);
   });
   
 }
