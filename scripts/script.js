@@ -1,5 +1,5 @@
 var app = (function(){
-	var markers = [];
+	var markers = [], infoWindows = [];
 // First, create an object containing LatLng and population for each city.
 var citymap = {
   delhi: {
@@ -32,32 +32,32 @@ function initMap() {
 // Data for the markers consisting of a name, a LatLng and a zIndex for the
 // order in which these markers should display on top of each other.
 var localListing = {"delhi":[
-  ['Loc 1', 28.6, 77.274856, 4],
-  ['Loc 2', 28.62, 77.259052, 5],
-  ['Loc 3', 28.63, 77.157507, 3],
-  ['Loc 4', 28.64, 77.28747820854187, 2],
-  ['loc 5', 28.65, 77.259302, 1]
+  ['Loc 1', 28.6, 77.274856, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et diam suscipit, accumsan erat ac, ultrices odio. Suspendisse tempor ante non risus varius, at blandit neque lobortis. Donec sollicitudin sapien et scelerisque ornare. Proin tristique elementum nisl, at tincidunt magna ornare et.', 4],
+  ['Loc 2', 28.62, 77.259052, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et diam suscipit, accumsan erat ac, ultrices odio. Suspendisse tempor ante non risus varius, at blandit neque lobortis. Donec sollicitudin sapien et scelerisque ornare. Proin tristique elementum nisl, at tincidunt magna ornare et.' , 5],
+  ['Loc 3', 28.63, 77.157507, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et diam suscipit, accumsan erat ac, ultrices odio. Suspendisse tempor ante non risus varius, at blandit neque lobortis. Donec sollicitudin sapien et scelerisque ornare. Proin tristique elementum nisl, at tincidunt magna ornare et.' , 3],
+  ['Loc 4', 28.64, 77.28747820854187, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et diam suscipit, accumsan erat ac, ultrices odio. Suspendisse tempor ante non risus varius, at blandit neque lobortis. Donec sollicitudin sapien et scelerisque ornare. Proin tristique elementum nisl, at tincidunt magna ornare et.' , 2],
+  ['loc 5', 28.65, 77.259302, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et diam suscipit, accumsan erat ac, ultrices odio. Suspendisse tempor ante non risus varius, at blandit neque lobortis. Donec sollicitudin sapien et scelerisque ornare. Proin tristique elementum nisl, at tincidunt magna ornare et.' , 1]
 ],
 "mumbai":[
-  ['Loc 1', 19.6, 72.274856, 4],
-  ['Loc 2', 19.62, 72.259052, 5],
-  ['Loc 3', 19.63, 72.157507, 3],
-  ['Loc 4', 19.64, 72.19747820854187, 2],
-  ['loc 5', 19.65, 72.259302, 1]
+  ['Loc 1', 19.6, 72.274856, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et diam suscipit, accumsan erat ac, ultrices odio. Suspendisse tempor ante non risus varius, at blandit neque lobortis. Donec sollicitudin sapien et scelerisque ornare. Proin tristique elementum nisl, at tincidunt magna ornare et.' , 4],
+  ['Loc 2', 19.62, 72.259052, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et diam suscipit, accumsan erat ac, ultrices odio. Suspendisse tempor ante non risus varius, at blandit neque lobortis. Donec sollicitudin sapien et scelerisque ornare. Proin tristique elementum nisl, at tincidunt magna ornare et.' , 5],
+  ['Loc 3', 19.63, 72.157507, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et diam suscipit, accumsan erat ac, ultrices odio. Suspendisse tempor ante non risus varius, at blandit neque lobortis. Donec sollicitudin sapien et scelerisque ornare. Proin tristique elementum nisl, at tincidunt magna ornare et.' , 3],
+  ['Loc 4', 19.64, 72.19747820854187, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et diam suscipit, accumsan erat ac, ultrices odio. Suspendisse tempor ante non risus varius, at blandit neque lobortis. Donec sollicitudin sapien et scelerisque ornare. Proin tristique elementum nisl, at tincidunt magna ornare et.' , 2],
+  ['loc 5', 19.65, 72.259302, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et diam suscipit, accumsan erat ac, ultrices odio. Suspendisse tempor ante non risus varius, at blandit neque lobortis. Donec sollicitudin sapien et scelerisque ornare. Proin tristique elementum nisl, at tincidunt magna ornare et.' , 1]
 ],
 "chennai":[
-  ['Loc 1', 13.6, 80.274856, 4],
-  ['Loc 2', 13.62, 80.259052, 5],
-  ['Loc 3', 13.63, 80.157507, 3],
-  ['Loc 4', 13.64, 80.28747820854187, 2],
-  ['loc 5', 13.65, 80.259302, 1]
+  ['Loc 1', 13.6, 80.274856, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et diam suscipit, accumsan erat ac, ultrices odio. Suspendisse tempor ante non risus varius, at blandit neque lobortis. Donec sollicitudin sapien et scelerisque ornare. Proin tristique elementum nisl, at tincidunt magna ornare et.' , 4],
+  ['Loc 2', 13.62, 80.259052, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et diam suscipit, accumsan erat ac, ultrices odio. Suspendisse tempor ante non risus varius, at blandit neque lobortis. Donec sollicitudin sapien et scelerisque ornare. Proin tristique elementum nisl, at tincidunt magna ornare et.' , 5],
+  ['Loc 3', 13.63, 80.157507, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et diam suscipit, accumsan erat ac, ultrices odio. Suspendisse tempor ante non risus varius, at blandit neque lobortis. Donec sollicitudin sapien et scelerisque ornare. Proin tristique elementum nisl, at tincidunt magna ornare et.' , 3],
+  ['Loc 4', 13.64, 80.28747820854187, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et diam suscipit, accumsan erat ac, ultrices odio. Suspendisse tempor ante non risus varius, at blandit neque lobortis. Donec sollicitudin sapien et scelerisque ornare. Proin tristique elementum nisl, at tincidunt magna ornare et.' , 2],
+  ['loc 5', 13.65, 80.259302, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et diam suscipit, accumsan erat ac, ultrices odio. Suspendisse tempor ante non risus varius, at blandit neque lobortis. Donec sollicitudin sapien et scelerisque ornare. Proin tristique elementum nisl, at tincidunt magna ornare et.' , 1]
 ],
 "kolkatta":[
-  ['Loc 1', 22.6, 88.274856, 4],
-  ['Loc 2', 22.62, 88.259052, 5],
-  ['Loc 3', 22.63, 88.157507, 3],
-  ['Loc 4', 22.64, 88.28747820854187, 2],
-  ['loc 5', 22.65, 88.259302, 1]
+  ['Loc 1', 22.6, 88.274856, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et diam suscipit, accumsan erat ac, ultrices odio. Suspendisse tempor ante non risus varius, at blandit neque lobortis. Donec sollicitudin sapien et scelerisque ornare. Proin tristique elementum nisl, at tincidunt magna ornare et.' , 4],
+  ['Loc 2', 22.62, 88.259052, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et diam suscipit, accumsan erat ac, ultrices odio. Suspendisse tempor ante non risus varius, at blandit neque lobortis. Donec sollicitudin sapien et scelerisque ornare. Proin tristique elementum nisl, at tincidunt magna ornare et.' , 5],
+  ['Loc 3', 22.63, 88.157507, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et diam suscipit, accumsan erat ac, ultrices odio. Suspendisse tempor ante non risus varius, at blandit neque lobortis. Donec sollicitudin sapien et scelerisque ornare. Proin tristique elementum nisl, at tincidunt magna ornare et.' , 3],
+  ['Loc 4', 22.64, 88.28747820854187, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et diam suscipit, accumsan erat ac, ultrices odio. Suspendisse tempor ante non risus varius, at blandit neque lobortis. Donec sollicitudin sapien et scelerisque ornare. Proin tristique elementum nisl, at tincidunt magna ornare et.' , 2],
+  ['loc 5', 22.65, 88.259302, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et diam suscipit, accumsan erat ac, ultrices odio. Suspendisse tempor ante non risus varius, at blandit neque lobortis. Donec sollicitudin sapien et scelerisque ornare. Proin tristique elementum nisl, at tincidunt magna ornare et.' , 1]
 ]};
 
 
@@ -87,16 +87,25 @@ function setMarkers(map) {
   };
   for (var i = 0; i < localListing[selectedCity].length; i++) {
     var localList = localListing[selectedCity][i];
+	var infoWindow = new google.maps.InfoWindow({
+    content: localList[3],
+    maxWidth: 200
+  });
     var marker = new google.maps.Marker({
       position: {lat: localList[1], lng: localList[2]},
       map: map,
       icon: image,
       shape: shape,
       title: localList[0],
-      zIndex: localList[3]
+      zIndex: localList[4]
     });
 	
+	infoWindows.push(infoWindow)
 	markers.push(marker);
+	
+	marker.addListener('click', function() {
+    infoWindow.open(map, marker);
+  });
   }
 }
 
