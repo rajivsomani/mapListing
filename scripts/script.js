@@ -19,23 +19,7 @@ var citymap = {
     population: 6000000
   }
 };
-var selectedCity;
 
-function initMap() {
-  selectedCity = document.querySelector("#city").value;
-  var map = new google.maps.Map(document.getElementById('map'), {
-    zoom: 10,
-    center: citymap[selectedCity].center
-  });
-  setMarkers(map);
-  document.getElementById('submit').addEventListener('click', function() {
-	selectedCity = document.querySelector("#city").value;
-    map.setCenter(citymap[selectedCity].center);
-	
-	setMarkers(map);
-  });
-  
-}
 
 // Data for the markers consisting of a name, a LatLng and a zIndex for the
 // order in which these markers should display on top of each other.
@@ -67,6 +51,44 @@ var localListing = {"delhi":[
   ['Loc 4', 22.64, 88.28747820854187, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et diam suscipit, accumsan erat ac, ultrices odio. Suspendisse tempor ante non risus varius, at blandit neque lobortis. Donec sollicitudin sapien et scelerisque ornare. Proin tristique elementum nisl, at tincidunt magna ornare et.' , 2],
   ['loc 5', 22.65, 88.259302, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et diam suscipit, accumsan erat ac, ultrices odio. Suspendisse tempor ante non risus varius, at blandit neque lobortis. Donec sollicitudin sapien et scelerisque ornare. Proin tristique elementum nisl, at tincidunt magna ornare et.' , 1]
 ]};
+
+var selectedCity;
+
+function initMap() {
+  selectedCity = document.querySelector("#city").value;
+  var map = new google.maps.Map(document.getElementById('map'), {
+    zoom: 10,
+    center: citymap[selectedCity].center
+  });
+  setMarkers(map);
+  document.getElementById('submit').addEventListener('click', function() {
+	selectedCity = document.querySelector("#city").value;
+    map.setCenter(citymap[selectedCity].center);
+	clearMarkers();
+	setMarkers(map);
+  });
+  
+}
+
+
+
+// Sets the map on all markers in the array.
+function setMapOnAll(map) {
+  for (var i = 0; i < markers.length; i++) {
+    markers[i].setMap(map);
+  }
+}
+
+// Removes the markers from the map, but keeps them in the array.
+function clearMarkers() {
+  setMapOnAll(null);
+}
+
+// Deletes all markers in the array by removing references to them.
+function deleteMarkers() {
+  clearMarkers();
+  markers = [];
+}
 
 
 function setMarkers(map) {
