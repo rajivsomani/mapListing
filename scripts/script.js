@@ -1,5 +1,5 @@
 var app = (function(){
-	var markers = [], infoWindows = [];
+	var markers = [], infoWindows = [], cityCircles = [];
 // First, create an object containing LatLng and population for each city.
 var citymap = {
   delhi: {
@@ -64,6 +64,7 @@ function initMap() {
   document.getElementById('submit').addEventListener('click', function() {
 	selectedCity = document.querySelector("#city").value;
     map.setCenter(citymap[selectedCity].center);
+	clearCircle();
 	clearMarkers();
 	setMarkers(map);
   });
@@ -88,6 +89,18 @@ function clearMarkers() {
 function deleteMarkers() {
   clearMarkers();
   markers = [];
+}
+
+// Sets the map on all circles in the array.
+function setCircleOnAll(map) {
+  for (var i = 0; i < cityCircles.length; i++) {
+    cityCircles[i].setMap(map);
+  }
+}
+
+// Removes the circles from the map, but keeps them in the array.
+function clearCircle(){
+	setCircleOnAll(null);
 }
 
 
@@ -117,6 +130,21 @@ function setMarkers(map) {
   };
   for (var i = 0; i < localListing[selectedCity].length; i++) {
     var localList = localListing[selectedCity][i];
+	
+	// Add the circle for this city to the map.
+    var cityCircle = new google.maps.Circle({
+      strokeColor: '#00FF00',
+      strokeOpacity: 0.2,
+      strokeWeight: 2,
+      fillColor: '#0000FF',
+      fillOpacity: 0.1,
+      map: map,
+      center: citymap[selectedCity].center,
+      radius: Math.sqrt(citymap[selectedCity].population) * 7
+    });
+	
+	cityCircles.push(cityCircle);
+	
 	var infoWindow = new google.maps.InfoWindow({
     content: localList[3],
     maxWidth: 200
@@ -136,6 +164,9 @@ function setMarkers(map) {
 	marker.addListener('click', function() {
     infoWindow.open(map, marker);
   });
+  
+  
+  
   }
 }
 
