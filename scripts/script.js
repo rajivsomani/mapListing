@@ -52,7 +52,7 @@ var localListing = {"delhi":[
   ['loc 5', 22.65, 88.259302, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et diam suscipit, accumsan erat ac, ultrices odio. Suspendisse tempor ante non risus varius, at blandit neque lobortis. Donec sollicitudin sapien et scelerisque ornare. Proin tristique elementum nisl, at tincidunt magna ornare et.' , 1]
 ]};
 
-var selectedCity;
+var selectedCity, infoWindow;
 
 function initMap() {
   selectedCity = document.querySelector("#city").value;
@@ -60,6 +60,7 @@ function initMap() {
     zoom: 10,
     center: citymap[selectedCity].center
   });
+  
   setMarkers(map);
   document.getElementById('submit').addEventListener('click', function() {
 	selectedCity = document.querySelector("#city").value;
@@ -145,9 +146,24 @@ function setMarkers(map) {
 	
 	cityCircles.push(cityCircle);
 	
-	var infoWindow = new google.maps.InfoWindow({
-    content: localList[3],
-    maxWidth: 200
+	 // InfoWindow content
+  var content = '<div id="iw-container">' +
+                    '<div class="iw-title">'+localList[0]+'Porcelain Factory of Vista Alegre</div>' +
+                    '<div class="iw-content">' +
+                      '<div class="iw-subTitle">History</div>' +
+                      '<img src="http://maps.marnoto.com/en/5wayscustomizeinfowindow/images/vistalegre.jpg" alt="Porcelain Factory of Vista Alegre" height="115" width="83">' +
+                      '<p>Founded in 1824, the Porcelain Factory of Vista Alegre was the first industrial unit dedicated to porcelain production in Portugal. For the foundation and success of this risky industrial development was crucial the spirit of persistence of its founder, José Ferreira Pinto Basto. Leading figure in Portuguese society of the nineteenth century farm owner, daring dealer, wisely incorporated the liberal ideas of the century, having become "the first example of free enterprise" in Portugal.</p>' +
+                      '<div class="iw-subTitle">Contacts</div>' +
+                      '<p>VISTA ALEGRE ATLANTIS, SA<br>3830-292 Ílhavo - Portugal<br>'+
+                      '<br>Phone. +351 234 320 600<br>e-mail: geral@vaa.pt<br>www: www.myvistaalegre.com</p>'+
+                    '</div>' +
+                    '<div class="iw-bottom-gradient"></div>' +
+                  '</div>';
+
+				  
+	infowindow = new google.maps.InfoWindow({
+	content: content,
+    maxWidth: 350
   });
     var marker = new google.maps.Marker({
       position: {lat: localList[1], lng: localList[2]},
@@ -158,16 +174,35 @@ function setMarkers(map) {
       zIndex: localList[4]
     });
 	
-	infoWindows.push(infoWindow)
+	infoWindows.push(infowindow)
 	markers.push(marker);
-	
+	(function(infowindow, marker){
 	marker.addListener('click', function() {
-    infoWindow.open(map, marker);
+    infowindow.open(map, marker);
+  }); 
+  })(infowindow, marker);
+  
+  
+  
+    // *
+  // START INFOWINDOW CUSTOMIZE.
+  // The google.maps.event.addListener() event expects
+  // the creation of the infowindow HTML structure 'domready'
+  // and before the opening of the infowindow, defined styles are applied.
+  // *//
+  google.maps.event.addListener(infowindow, 'domready', function() {
+    // Reference to the DIV that wraps the bottom of infowindow
+
+	var iwOuter = document.getElementsByClassName("gm-style-iw");
+	for (var i = 0; i < iwOuter.length; i++) {
+		iwOuter[i].previousSibling.style.display = "none";
+	}
   });
   
-  
-  
   }
+  
+  
+  
 }
 
         return {
