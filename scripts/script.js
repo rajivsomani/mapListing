@@ -20,42 +20,116 @@ var citymap = {
   }
 };
 
-
-// Data for the markers consisting of a name, a LatLng and a zIndex for the
-// order in which these markers should display on top of each other.
-var localListing = {"delhi":[
-  ['Loc 1', 28.6, 77.274856, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et diam suscipit, accumsan erat ac, ultrices odio. Suspendisse tempor ante non risus varius, at blandit neque lobortis. Donec sollicitudin sapien et scelerisque ornare. Proin tristique elementum nisl, at tincidunt magna ornare et.', 4],
+/*
+['Loc 1', 28.6, 77.274856, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et diam suscipit, accumsan erat ac, ultrices odio. Suspendisse tempor ante non risus varius, at blandit neque lobortis. Donec sollicitudin sapien et scelerisque ornare. Proin tristique elementum nisl, at tincidunt magna ornare et.', 4],
   ['Loc 2', 28.62, 77.259052, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et diam suscipit, accumsan erat ac, ultrices odio. Suspendisse tempor ante non risus varius, at blandit neque lobortis. Donec sollicitudin sapien et scelerisque ornare. Proin tristique elementum nisl, at tincidunt magna ornare et.' , 5],
   ['Loc 3', 28.63, 77.157507, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et diam suscipit, accumsan erat ac, ultrices odio. Suspendisse tempor ante non risus varius, at blandit neque lobortis. Donec sollicitudin sapien et scelerisque ornare. Proin tristique elementum nisl, at tincidunt magna ornare et.' , 3],
   ['Loc 4', 28.64, 77.28747820854187, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et diam suscipit, accumsan erat ac, ultrices odio. Suspendisse tempor ante non risus varius, at blandit neque lobortis. Donec sollicitudin sapien et scelerisque ornare. Proin tristique elementum nisl, at tincidunt magna ornare et.' , 2],
   ['loc 5', 28.65, 77.259302, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et diam suscipit, accumsan erat ac, ultrices odio. Suspendisse tempor ante non risus varius, at blandit neque lobortis. Donec sollicitudin sapien et scelerisque ornare. Proin tristique elementum nisl, at tincidunt magna ornare et.' , 1]
+*/
+// Data for the markers consisting of a name, a LatLng and a zIndex for the
+// order in which these markers should display on top of each other.
+var localListing = {"delhi":{"vehicles":[
+  ['Loc 1', 28.6, 77.174856, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.', 4],
+  ['Loc 2', 28.52, 77.059052, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.' , 5],
+  ['Loc 3', 28.63, 77.157507, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.' , 3],
+  ['Loc 4', 28.64, 77.08747820854187, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.' , 2],
+  ['loc 5', 28.65, 77.259302, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.' , 1]
 ],
-"mumbai":[
-  ['Loc 1', 19.06, 72.874856, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et diam suscipit, accumsan erat ac, ultrices odio. Suspendisse tempor ante non risus varius, at blandit neque lobortis. Donec sollicitudin sapien et scelerisque ornare. Proin tristique elementum nisl, at tincidunt magna ornare et.' , 4],
-  ['Loc 2', 19.062, 72.859052, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et diam suscipit, accumsan erat ac, ultrices odio. Suspendisse tempor ante non risus varius, at blandit neque lobortis. Donec sollicitudin sapien et scelerisque ornare. Proin tristique elementum nisl, at tincidunt magna ornare et.' , 5],
-  ['Loc 3', 19.063, 72.857507, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et diam suscipit, accumsan erat ac, ultrices odio. Suspendisse tempor ante non risus varius, at blandit neque lobortis. Donec sollicitudin sapien et scelerisque ornare. Proin tristique elementum nisl, at tincidunt magna ornare et.' , 3],
-  ['Loc 4', 19.064, 72.89747820854187, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et diam suscipit, accumsan erat ac, ultrices odio. Suspendisse tempor ante non risus varius, at blandit neque lobortis. Donec sollicitudin sapien et scelerisque ornare. Proin tristique elementum nisl, at tincidunt magna ornare et.' , 2],
-  ['loc 5', 19.065, 72.859302, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et diam suscipit, accumsan erat ac, ultrices odio. Suspendisse tempor ante non risus varius, at blandit neque lobortis. Donec sollicitudin sapien et scelerisque ornare. Proin tristique elementum nisl, at tincidunt magna ornare et.' , 1]
+"real_estate":[
+  ['Loc 1', 28.5, 77.274856, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.', 4],
+  ['Loc 2', 28.52, 77.059052, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.' , 5],
+  ['Loc 3', 28.53, 77.157507, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.' , 3],
+  ['Loc 4', 28.54, 77.18747820854187, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.' , 2],
+  ['loc 5', 28.55, 77.159302, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.' , 1]
 ],
-"chennai":[
-  ['Loc 1', 13.06, 80.274856, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et diam suscipit, accumsan erat ac, ultrices odio. Suspendisse tempor ante non risus varius, at blandit neque lobortis. Donec sollicitudin sapien et scelerisque ornare. Proin tristique elementum nisl, at tincidunt magna ornare et.' , 4],
-  ['Loc 2', 13.062, 80.259052, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et diam suscipit, accumsan erat ac, ultrices odio. Suspendisse tempor ante non risus varius, at blandit neque lobortis. Donec sollicitudin sapien et scelerisque ornare. Proin tristique elementum nisl, at tincidunt magna ornare et.' , 5],
-  ['Loc 3', 13.063, 80.157507, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et diam suscipit, accumsan erat ac, ultrices odio. Suspendisse tempor ante non risus varius, at blandit neque lobortis. Donec sollicitudin sapien et scelerisque ornare. Proin tristique elementum nisl, at tincidunt magna ornare et.' , 3],
-  ['Loc 4', 13.064, 80.28747820854187, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et diam suscipit, accumsan erat ac, ultrices odio. Suspendisse tempor ante non risus varius, at blandit neque lobortis. Donec sollicitudin sapien et scelerisque ornare. Proin tristique elementum nisl, at tincidunt magna ornare et.' , 2],
-  ['loc 5', 13.065, 80.259302, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et diam suscipit, accumsan erat ac, ultrices odio. Suspendisse tempor ante non risus varius, at blandit neque lobortis. Donec sollicitudin sapien et scelerisque ornare. Proin tristique elementum nisl, at tincidunt magna ornare et.' , 1]
+"pet":[
+  ['Loc 1', 28.4, 77.274856, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.', 4],
+  ['Loc 2', 28.42, 77.259052, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.' , 5],
+  ['Loc 3', 28.53, 77.157507, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.' , 3],
+  ['Loc 4', 28.64, 77.18747820854187, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.' , 2],
+  ['loc 5', 28.45, 77.159302, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.' , 1]
 ],
-"kolkatta":[
-  ['Loc 1', 22.6, 88.274856, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et diam suscipit, accumsan erat ac, ultrices odio. Suspendisse tempor ante non risus varius, at blandit neque lobortis. Donec sollicitudin sapien et scelerisque ornare. Proin tristique elementum nisl, at tincidunt magna ornare et.' , 4],
-  ['Loc 2', 22.62, 88.259052, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et diam suscipit, accumsan erat ac, ultrices odio. Suspendisse tempor ante non risus varius, at blandit neque lobortis. Donec sollicitudin sapien et scelerisque ornare. Proin tristique elementum nisl, at tincidunt magna ornare et.' , 5],
-  ['Loc 3', 22.63, 88.157507, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et diam suscipit, accumsan erat ac, ultrices odio. Suspendisse tempor ante non risus varius, at blandit neque lobortis. Donec sollicitudin sapien et scelerisque ornare. Proin tristique elementum nisl, at tincidunt magna ornare et.' , 3],
-  ['Loc 4', 22.64, 88.28747820854187, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et diam suscipit, accumsan erat ac, ultrices odio. Suspendisse tempor ante non risus varius, at blandit neque lobortis. Donec sollicitudin sapien et scelerisque ornare. Proin tristique elementum nisl, at tincidunt magna ornare et.' , 2],
-  ['loc 5', 22.65, 88.259302, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et diam suscipit, accumsan erat ac, ultrices odio. Suspendisse tempor ante non risus varius, at blandit neque lobortis. Donec sollicitudin sapien et scelerisque ornare. Proin tristique elementum nisl, at tincidunt magna ornare et.' , 1]
-]};
+"electronics":[
+  ['Loc 1', 28.7, 77.274856, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.', 4],
+  ['Loc 2', 28.72, 77.259052, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.' , 5],
+  ['Loc 3', 28.73, 77.157507, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.' , 3],
+  ['Loc 4', 28.74, 77.28747820854187, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.' , 2],
+  ['loc 5', 28.75, 77.259302, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.' , 1]
+]},
+"mumbai":{
+  "vehicles" : [['Loc 1', 19.06, 72.874856, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.' , 4],
+  ['Loc 2', 19.262, 72.859052, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.' , 5],
+  ['Loc 3', 19.163, 72.857507, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.' , 3],
+  ['Loc 4', 19.264, 72.89747820854187, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.' , 2],
+  ['loc 5', 19.265, 72.859302, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.' , 1]],
+  "real_estate" : [['Loc 1', 19.08, 72.874856, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.' , 4],
+  ['Loc 2', 19.082, 72.859052, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.' , 5],
+  ['Loc 3', 19.083, 72.857507, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.' , 3],
+  ['Loc 4', 19.084, 72.89747820854187, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.' , 2],
+  ['loc 5', 19.085, 72.859302, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.' , 1]],
+  "pet" : [['Loc 1', 19.07, 72.874856, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.' , 4],
+  ['Loc 2', 19.072, 72.859052, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.' , 5],
+  ['Loc 3', 19.073, 72.857507, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.' , 3],
+  ['Loc 4', 19.074, 72.89747820854187, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.' , 2],
+  ['loc 5', 19.075, 72.859302, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.' , 1]],
+  "electronics" : [['Loc 1', 19.16, 72.874856, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.' , 4],
+  ['Loc 2', 19.162, 72.859052, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.' , 5],
+  ['Loc 3', 19.163, 72.857507, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.' , 3],
+  ['Loc 4', 19.164, 72.89747820854187, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.' , 2],
+  ['loc 5', 19.165, 72.859302, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.' , 1]]
+  
+},
+"chennai":{
+  "vehicles":[['Loc 1', 13.06, 80.174856, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.' , 4],
+  ['Loc 2', 13.062, 80.159052, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.' , 5],
+  ['Loc 3', 13.063, 80.257507, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.' , 3],
+  ['Loc 4', 13.064, 80.18747820854187, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.' , 2],
+  ['loc 5', 13.065, 80.209302, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.' , 1]],
+   "real_estate":[['Loc 1', 13.04, 80.274856, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.' , 4],
+  ['Loc 2', 13.052, 80.259052, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.' , 5],
+  ['Loc 3', 13.053, 80.157507, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.' , 3],
+  ['Loc 4', 13.054, 80.28747820854187, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.' , 2],
+  ['loc 5', 13.055, 80.259302, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.' , 1]],
+   "pet":[['Loc 1', 13.05, 80.274856, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.' , 4],
+  ['Loc 2', 13.052, 80.259052, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.' , 5],
+  ['Loc 3', 13.043, 80.257507, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.' , 3],
+  ['Loc 4', 13.034, 80.18747820854187, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.' , 2],
+  ['loc 5', 13.015, 80.259302, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.' , 1]],
+   "electronics":[['Loc 1', 13.06, 80.174856, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.' , 4],
+  ['Loc 2', 13.062, 80.159052, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.' , 5],
+  ['Loc 3', 13.063, 80.157507, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.' , 3],
+  ['Loc 4', 13.064, 80.18747820854187, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.' , 2],
+  ['loc 5', 13.065, 80.159302, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.' , 1]]
+},
+"kolkatta":{
+  "vehicles":[['Loc 1', 22.6, 88.174856, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.' , 4],
+  ['Loc 2', 22.59, 88.279052, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.' , 5],
+  ['Loc 3', 22.57, 88.357507, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.' , 3],
+  ['Loc 4', 22.56, 88.21747820854187, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.' , 2],
+  ['loc 5', 22.55, 88.329302, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.' , 1]],
+    "real_estate":[['Loc 1', 22.54, 88.274856, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.' , 4],
+  ['Loc 2', 22.53, 88.259052, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.' , 5],
+  ['Loc 3', 22.51, 88.157507, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.' , 3],
+  ['Loc 4', 22.51, 88.28747820854187, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.' , 2],
+  ['loc 5', 22.50, 88.259302, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.' , 1]],
+    "pet":[['Loc 1', 22.6, 88.354856, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.' , 4],
+  ['Loc 2', 22.62, 88.349052, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.' , 5],
+  ['Loc 3', 22.63, 88.337507, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.' , 3],
+  ['Loc 4', 22.64, 88.32747820854187, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.' , 2],
+  ['loc 5', 22.65, 88.319302, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.' , 1]],
+    "electronics":[	['Loc 1', 22.61, 88.214856, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.' , 4],
+  ['Loc 2', 22.60, 88.279052, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.' , 5],
+  ['Loc 3', 22.59, 88.357507, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.' , 3],
+  ['Loc 4', 22.58, 88.28747820854187, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.' , 2],
+  ['loc 5', 22.57, 88.259302, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.' , 1]]
+}};
 
-var selectedCity, infoWindow;
+var selectedCity, infoWindow, selectedCategory;
 
 function initMap() {
   selectedCity = document.querySelector("#city").value;
+  selectedCategory = document.querySelector("#category").value;
   var map = new google.maps.Map(document.getElementById('map'), {
     zoom: 10,
     center: citymap[selectedCity].center
@@ -64,6 +138,7 @@ function initMap() {
   setMarkers(map);
   document.getElementById('submit').addEventListener('click', function() {
 	selectedCity = document.querySelector("#city").value;
+    selectedCategory = document.querySelector("#category").value;
     map.setCenter(citymap[selectedCity].center);
 	clearCircle();
 	clearMarkers();
@@ -129,8 +204,8 @@ function setMarkers(map) {
     coords: [1, 1, 1, 20, 18, 20, 18, 1],
     type: 'poly'
   };
-  for (var i = 0; i < localListing[selectedCity].length; i++) {
-    var localList = localListing[selectedCity][i];
+  for (var i = 0; i < localListing[selectedCity][selectedCategory].length; i++) {
+    var localList = localListing[selectedCity][selectedCategory][i];
 	
 	// Add the circle for this city to the map.
     var cityCircle = new google.maps.Circle({
@@ -148,14 +223,14 @@ function setMarkers(map) {
 	
 	 // InfoWindow content
   var content = '<div id="iw-container">' +
-                    '<div class="iw-title">'+localList[0]+'Porcelain Factory of Vista Alegre</div>' +
+                    '<div class="iw-title">'+localList[0]+'</div>' +
                     '<div class="iw-content">' +
-                      '<div class="iw-subTitle">History</div>' +
+                      '<div class="iw-subTitle">Details</div>' +
                       '<img src="http://maps.marnoto.com/en/5wayscustomizeinfowindow/images/vistalegre.jpg" alt="Porcelain Factory of Vista Alegre" height="115" width="83">' +
-                      '<p>Founded in 1824, the Porcelain Factory of Vista Alegre was the first industrial unit dedicated to porcelain production in Portugal. For the foundation and success of this risky industrial development was crucial the spirit of persistence of its founder, José Ferreira Pinto Basto. Leading figure in Portuguese society of the nineteenth century farm owner, daring dealer, wisely incorporated the liberal ideas of the century, having become "the first example of free enterprise" in Portugal.</p>' +
+                      '<p>'+localList[3]+'</p>' +
                       '<div class="iw-subTitle">Contacts</div>' +
-                      '<p>VISTA ALEGRE ATLANTIS, SA<br>3830-292 Ílhavo - Portugal<br>'+
-                      '<br>Phone. +351 234 320 600<br>e-mail: geral@vaa.pt<br>www: www.myvistaalegre.com</p>'+
+                      '<p>'+selectedCity+'<br>'+
+                      '<br>Phone. +91 1800 320 600<br>e-mail: mail@mail.com<br></p>'+
                     '</div>' +
                     '<div class="iw-bottom-gradient"></div>' +
                   '</div>';
