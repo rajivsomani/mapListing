@@ -3,7 +3,7 @@ var app = (function(){
 // First, create an object containing LatLng and population for each city.
 var citymap = {
   delhi: {
-    center: {lat: 28.6, lng: 77.2},
+    center: {lat: 28.65, lng: 77.1},
     population: 11000000
   },
   mumbai: {
@@ -20,13 +20,6 @@ var citymap = {
   }
 };
 
-/*
-['Loc 1', 28.6, 77.274856, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et diam suscipit, accumsan erat ac, ultrices odio. Suspendisse tempor ante non risus varius, at blandit neque lobortis. Donec sollicitudin sapien et scelerisque ornare. Proin tristique elementum nisl, at tincidunt magna ornare et.', 4],
-  ['Loc 2', 28.62, 77.259052, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et diam suscipit, accumsan erat ac, ultrices odio. Suspendisse tempor ante non risus varius, at blandit neque lobortis. Donec sollicitudin sapien et scelerisque ornare. Proin tristique elementum nisl, at tincidunt magna ornare et.' , 5],
-  ['Loc 3', 28.63, 77.157507, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et diam suscipit, accumsan erat ac, ultrices odio. Suspendisse tempor ante non risus varius, at blandit neque lobortis. Donec sollicitudin sapien et scelerisque ornare. Proin tristique elementum nisl, at tincidunt magna ornare et.' , 3],
-  ['Loc 4', 28.64, 77.28747820854187, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et diam suscipit, accumsan erat ac, ultrices odio. Suspendisse tempor ante non risus varius, at blandit neque lobortis. Donec sollicitudin sapien et scelerisque ornare. Proin tristique elementum nisl, at tincidunt magna ornare et.' , 2],
-  ['loc 5', 28.65, 77.259302, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et diam suscipit, accumsan erat ac, ultrices odio. Suspendisse tempor ante non risus varius, at blandit neque lobortis. Donec sollicitudin sapien et scelerisque ornare. Proin tristique elementum nisl, at tincidunt magna ornare et.' , 1]
-*/
 // Data for the markers consisting of a name, a LatLng and a zIndex for the
 // order in which these markers should display on top of each other.
 var localListing = {"delhi":{"vehicles":[
@@ -103,14 +96,14 @@ var localListing = {"delhi":{"vehicles":[
   ['loc 5', 13.065, 80.159302, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.' , 1]]
 },
 "kolkatta":{
-  "vehicles":[['Loc 1', 22.6, 88.174856, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.' , 4],
+  "vehicles":[['Loc 1', 22.54, 88.474856, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.' , 4],
   ['Loc 2', 22.59, 88.279052, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.' , 5],
   ['Loc 3', 22.57, 88.357507, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.' , 3],
   ['Loc 4', 22.56, 88.21747820854187, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.' , 2],
   ['loc 5', 22.55, 88.329302, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.' , 1]],
     "real_estate":[['Loc 1', 22.54, 88.274856, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.' , 4],
   ['Loc 2', 22.53, 88.259052, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.' , 5],
-  ['Loc 3', 22.51, 88.157507, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.' , 3],
+  ['Loc 3', 22.51, 88.227507, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.' , 3],
   ['Loc 4', 22.51, 88.28747820854187, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.' , 2],
   ['loc 5', 22.50, 88.259302, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.' , 1]],
     "pet":[['Loc 1', 22.6, 88.354856, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.' , 4],
@@ -126,7 +119,33 @@ var localListing = {"delhi":{"vehicles":[
 }};
 
 var selectedCity, infoWindow, selectedCategory;
+ function codeLatLng(pos) {
 
+    var geocoder = new google.maps.Geocoder();
+    geocoder.geocode({'latLng': pos}, function(results, status) {
+      if (status == google.maps.GeocoderStatus.OK) {
+        if (results[1]) {
+        //find city name
+             for (var i=0; i<results[0].address_components.length; i++) {
+            for (var b=0;b<results[0].address_components[i].types.length;b++) {
+
+            //there are different types that might hold a city admin_area_lvl_1 usually does in come cases looking for sublocality type will be more appropriate
+                if (results[0].address_components[i].types[b] == "administrative_area_level_2") {
+                    //this is the object you are looking for
+                    selectedCity= results[0].address_components[i].long_name.toLowerCase();
+                    break;
+                }
+            }
+        }
+
+        } else {
+          alert("No results found");
+        }
+      } else {
+        alert("Geocoder failed due to: " + status);
+      }
+    });
+  }
 function initMap() {
   selectedCity = document.querySelector("#city").value;
   selectedCategory = document.querySelector("#category").value;
@@ -134,7 +153,29 @@ function initMap() {
     zoom: 10,
     center: citymap[selectedCity].center
   });
-  
+    if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(function(position) {
+      var pos = {
+        lat: position.coords.latitude,
+        lng: position.coords.longitude
+      };
+      map.setCenter(pos);
+	  codeLatLng(pos);
+    }, function() {
+      handleLocationError(true);
+    });
+  } else {
+    // Browser doesn't support Geolocation
+    handleLocationError(false);
+  }
+
+  function handleLocationError(browserHasGeolocation){
+	var error =browserHasGeolocation ?
+                        'Error: The Geolocation service failed.' :
+                        'Error: Your browser doesn\'t support geolocation.';
+	alert(error);
+  }
+
   setMarkers(map);
   document.getElementById('submit').addEventListener('click', function() {
 	selectedCity = document.querySelector("#city").value;
