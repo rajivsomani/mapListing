@@ -201,7 +201,8 @@ app.locationListing = (function(app) {
       zoom: 10,
       center: citymap[selectedCity].center
     });
-    if (navigator.geolocation) {
+    /*
+	if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(function(position) {
         var pos = {
           lat: position.coords.latitude,
@@ -213,15 +214,10 @@ app.locationListing = (function(app) {
         handleLocationError(true);
       });
     } else {
-      /*  Browser doesn't support Geolocation  */
+      //  Browser doesn't support Geolocation
       handleLocationError(false);
-    }
-
-    function handleLocationError(browserHasGeolocation) {
-      var error = browserHasGeolocation ? 'Error: The Geolocation service failed.' : 'Error: Your browser doesn\'t support geolocation.';
-      alert(error);
-    }
-
+    }*/
+	
     setMarkers(map);
     document.getElementById('submit').addEventListener('click', function() {
       selectedCity = document.querySelector("#city").value;
@@ -234,8 +230,11 @@ app.locationListing = (function(app) {
 
   }
 
-
-
+  /* Alert geolocation error message*/
+  function handleLocationError(browserHasGeolocation) {
+      var error = browserHasGeolocation ? 'Error: The Geolocation service failed.' : 'Error: Your browser doesn\'t support geolocation.';
+      alert(error);
+    }
   /* Sets the map on all markers in the array. */
   function setMapOnAll(map) {
     for (var i = 0; i < markers.length; i++) {
