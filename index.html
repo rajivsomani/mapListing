@@ -1,39 +1,36 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
-    <meta charset="utf-8">
-    <title>Location Listing</title>
-	<link rel="stylesheet" href="styles/style.css" />
-	<script src="scripts/jquery.min.js"></script>
-	<script src="scripts/script.js"></script>
-  </head>
-  <body>
+
+<head>
+  <meta name="viewport" content="initial-scale=1.0, width=device-width, user-scalable=no">
+  <meta charset="utf-8">
+  <title>Location Listing</title>
+  <link rel="stylesheet" href="styles/style.css" />
+</head>
+
+<body>
   <div id="floating-panel">
-	<div id="search">
+    <div id="search">
       <select id="city" name="city" autocomplete="off">
-		<option value="">Please select a city</option>
-		<option value="delhi" selected>Delhi</option>
-		<option value="mumbai">Mumbai</option>
-		<option value="chennai">Chennai</option>
-		<option value="kolkatta">Kolkatta</option>
-	  </select>
-	  <select id="category" name="category" autocomplete="off">
-		<option value="">Please select a category</option>
-		<option value="vehicles" selected>Vehicles	</option>
-		<option value="real_estate">Real Estate</option>
-		<option value="pet">Pet & Pet care</option>
-		<option value="electronics">Electronics & Appliances</option>
-	  </select>
+        <option value="">Please select a city</option>
+        <option value="delhi" selected>Delhi</option>
+        <option value="mumbai">Mumbai</option>
+        <option value="chennai">Chennai</option>
+        <option value="kolkatta">Kolkatta</option>
+      </select>
+      <select id="category" name="category" autocomplete="off">
+        <option value="">Please select a category</option>
+        <option value="vehicles" selected>Vehicles </option>
+        <option value="real_estate">Real Estate</option>
+        <option value="pet">Pet & Pet care</option>
+        <option value="electronics">Electronics & Appliances</option>
+      </select>
       <input id="submit" type="button" value="Submit">
-	 </div>
     </div>
-    <div id="map"></div>
-    <script>
+  </div>
+  <div id="map"></div>
+  <script async defer src="scripts/script.js"></script>
+  <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD2fzlKj3s7BstdzjcslRDmynTYx00i3g8&signed_in=true&callback=app.locationListing.start"></script>
+</body>
 
-
-    </script>
-    <script async defer
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD2fzlKj3s7BstdzjcslRDmynTYx00i3g8&signed_in=true&callback=app.start"></script>
-  </body>
 </html>
